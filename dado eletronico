@@ -1,0 +1,116 @@
+void setup() {
+  pinMode(9, INPUT);
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  pinMode(5, OUTPUT);
+  pinMode(4, OUTPUT);
+  pinMode(8, OUTPUT);
+  pinMode(7, OUTPUT);
+  pinMode(6, OUTPUT);
+  randomSeed(analogRead(0));
+  iniciaLeds();
+  for (int n=1; n<7; n++){
+    testaNumero(n);
+    delay(1000);
+  }
+  apagaTodos();
+}
+
+void loop() {
+  // Quando aperta o botão, Leds ligam alternadamente
+  while (digitalRead(9) == HIGH) {
+    //Faz o teste dos LEDS
+    apagaTodos();
+    acendeSequencia();
+    delay(400);
+    apagaSequencia();
+    delay(400);
+    
+
+    // Sorteia o número
+    num = random(1, 6 + 1);
+  }
+  testaNumero(num);
+}
+
+void iniciaLeds() {
+
+  //todos desligam, de 2 a 8:
+  apagaSequencia();
+  //todos ligam, de 2 a 8:
+  acendeSequencia();
+  //todos desligam, de 2 a 8:
+  apagaSequencia();
+  delay(300);
+}
+
+void acendeSequencia() {
+  for (int led = 2; led <= 8; led++) {
+    digitalWrite(led, HIGH);
+    delay(100);
+  }
+}
+
+void apagaSequencia() {
+  for (int led = 2; led <= 8; led++) {
+    digitalWrite(led, LOW);
+    delay(100);
+  }
+}
+
+void acendeTodos() {
+  for (int led = 2; led <= 8; led++) {
+    digitalWrite(led, HIGH);
+  }
+}
+
+
+void apagaTodos() {
+  for (int led = 2; led <= 8; led++) {
+    digitalWrite(led, LOW);
+  }
+}
+
+void testaNumero(int numero) {
+  // Dependendo do número sorteado, liga os LEDs
+  // correspondentes.
+  if (numero == 1) {
+    apagaTodos();
+    digitalWrite(4, HIGH);
+  }
+  if (numero == 2) {
+    apagaTodos();
+    digitalWrite(2, HIGH);
+    digitalWrite(6, HIGH);
+  }
+  if (numero == 3) {
+    apagaTodos();
+    digitalWrite(2, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(6, HIGH);
+  }
+  if (numero == 4) {
+    apagaTodos();
+    digitalWrite(2, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(8, HIGH);
+  }
+  if (numero == 5) {
+    apagaTodos();
+    digitalWrite(2, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(8, HIGH);
+  }
+  if (numero == 6) {
+    apagaTodos();
+    digitalWrite(2, HIGH);
+    digitalWrite(3, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+    digitalWrite(7, HIGH);
+    digitalWrite(8, HIGH);
+  }
+}
